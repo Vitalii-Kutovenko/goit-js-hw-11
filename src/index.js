@@ -9,50 +9,13 @@ const BASE_URL = 'https://pixabay.com/api/';
 const formEl = document.querySelector('#search-form');
 const inputEl = formEl.querySelector('[name="searchQuery"]');
 const galleryEl = document.querySelector('.gallery');
+const addBtn = document.querySelector(`.load-more`)
 
 formEl.addEventListener('submit', onSearch);
 
-async function onSearch(event) {
-  event.preventDefault();
-  
-  const searchQuery = inputEl.value.trim();
-  
-  if (searchQuery === '') {
-    return;
-  }
-  
-  const params = new URLSearchParams({
-    key: API_KEY,
-    q: searchQuery,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-  });
-  
-  try {
-    const response = await axios.get(`${BASE_URL}?${params}`);
-    
-    const hits = response.data.hits;
-    
-    if (hits.length === 0) {
-      Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-      return;
-    }
-    
-    const markup = createGalleryMarkup(hits);
-    
-    galleryEl.innerHTML = markup;
-    
-    const lightbox = new SimpleLightbox('.gallery a');
-    
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function createGalleryMarkup(images) {
-  return images
-    .map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
+  return images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads, totalHits }) => {
+    console.log(totalHits)
       return `
         <div class="photo-card">
           <a href="${largeImageURL}">
@@ -81,13 +44,11 @@ function createGalleryMarkup(images) {
 
 async function onSearch(event) {
   event.preventDefault();
-  
   const searchQuery = inputEl.value.trim();
-  
   if (searchQuery === '') {
     return;
   }
-  
+  inputEl.value = ""
   const params = new URLSearchParams({
     key: API_KEY,
     q: searchQuery,
@@ -97,24 +58,22 @@ async function onSearch(event) {
   });
   
   try {
-    const response = await axios.get(`${BASE_URL}?${params}`);
-    
+    const response = await axios.get(`${BASE_URL}?${params}&page=1&per_page=4`);
     const hits = response.data.hits;
-    
     if (hits.length === 0) {
       Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-      return;
+      addBtn.style.display = "none";
+      galleryEl.innerHTML = "";
+      return
     }
     
-    galleryEl.innerHTML = ''; // Очищаем содержимое галереи
-    
+    galleryEl.innerHTML = ''; 
+    addBtn.style.display = "block";
     const markup = createGalleryMarkup(hits);
-    
     galleryEl.innerHTML = markup;
-    
     const lightbox = new SimpleLightbox('.gallery a');
-    
   } catch (error) {
     console.log(error);
   }
 }
+console.dir(addBtn)
