@@ -1,0 +1,86 @@
+
+.container-form {
+    display: flex;
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+}
+// .search-form {
+//     position: relative;
+//     &:hover > input {
+//         width: 300px;
+//     }
+//     &:hover > .btn-sub {
+//         right: -35px;
+//     }
+//     &:active > input {
+//         width: 300px;
+//     }
+// }
+// .search-form > input {
+//     width: 41px;
+//     height: 41px;
+//     padding-left: 15px;
+//     color: transparent;
+//     border-radius: 20px;
+//     border-width: 2px;
+//     border-color: burlywood;
+//     border-style: double;
+//     transition: width 300ms, color 200ms;
+//     &:active,
+//     &:hover,
+//     &:focus {
+//         outline: none;
+//         color: black;
+//         width: 300px;
+//     }
+//     &::placeholder {
+//         color: transparent;
+//     }
+// }
+// .btn-sub {
+//     position: absolute;
+//     background-color: rgb(0, 153, 255);
+//     border: none;
+//     border-radius: 50%;
+//     padding: 3px;
+//     top: 50%;
+//     right: 5px;
+//     transform: translate(0%, -50%);
+//     transition: 300ms;
+// }
+.btn-sub {
+    border: none;
+    background-color: transparent;
+}
+
+input {
+    background-color: transparent;
+    outline: none;
+    border-width: 2px;
+    border-color: rgb(93, 93, 93);
+    border-style: groove;
+    border-radius: 20px;
+    transition: width 300ms, opacity 300ms;
+    width: 41px;
+    height: 41px;
+    padding-left: 10px;
+    opacity: 0;
+    &::placeholder {
+        color: transparent;
+    }
+}
+.search-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    &:hover > input,
+    &:focus-within > input {
+        width: 300px;
+        opacity: 1;
+        &::placeholder {
+            color: gray;
+        }
+    }
+}

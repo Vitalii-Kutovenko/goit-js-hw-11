@@ -1,0 +1,56 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+.container-form {
+  display: flex;
+  background-color: rgb(67, 125, 240);
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-form {
+  position: relative;
+}
+.search-form:hover > input {
+  width: 300px;
+}
+.search-form:hover > .btn-sub {
+  right: -35px;
+}
+.search-form:active > input {
+  width: 300px;
+}
+
+.search-form > input {
+  width: 41px;
+  height: 41px;
+  padding-left: 15px;
+  color: transparent;
+  border-radius: 20px;
+  border-width: 2px;
+  border-color: burlywood;
+  border-style: double;
+  transition: width 300ms, color 200ms;
+}
+.search-form > input:active, .search-form > input:hover, .search-form > input:focus {
+  outline: none;
+  color: black;
+  width: 300px;
+}
+.search-form > input::-moz-placeholder {
+  color: transparent;
+}
+.search-form > input::placeholder {
+  color: transparent;
+}
+
+.btn-sub {
+  position: absolute;
+  background-color: rgb(0, 153, 255);
+  border: none;
+  border-radius: 50%;
+  padding: 3px;
+  top: 50%;
+  right: 5px;
+  transform: translate(0%, -50%);
+  transition: 300ms;
+}/*# sourceMappingURL=index.css.map */
