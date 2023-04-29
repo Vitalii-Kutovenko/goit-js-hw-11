@@ -10,7 +10,9 @@ const formEl = document.querySelector('#search-form');
 const inputEl = formEl.querySelector('[name="searchQuery"]');
 const galleryEl = document.querySelector('.gallery');
 const addBtn = document.querySelector(`.load-more`);
-let acc = ""
+let acc = "";
+let page = 2;
+let per_page = 40;
 
 formEl.addEventListener('submit', onSearch);
 
@@ -42,9 +44,11 @@ function createGalleryMarkup(images) {
 }
 
 
+
 async function onSearch(event) {
   event.preventDefault();
   const searchQuery = inputEl.value.trim();
+  page = 2;
   if (searchQuery === '') {
     return;
   }
@@ -81,10 +85,8 @@ async function onSearch(event) {
     console.log(error);
   }
 }
-console.dir(addBtn);
 
-let page = 2;
-let per_page = 40;
+
 
 async function loadMore() {
 addBtn.disabled = true;
